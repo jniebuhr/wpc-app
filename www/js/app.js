@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('wpc', ['ionic', 'wpc.controllers', 'wpc.services', 'ngResource'])
+angular.module('wpc', ['ionic', 'wpc.controllers', 'wpc.services', 'wpc.directives', 'ngResource'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -19,6 +19,26 @@ angular.module('wpc', ['ionic', 'wpc.controllers', 'wpc.services', 'ngResource']
       StatusBar.styleLightContent();
     }
   });
+})
+
+.filter('truncate', function () {
+    return function (value, wordwise, max, tail) {
+        if (!value) return '';
+
+        max = parseInt(max, 10);
+        if (!max) return value;
+        if (value.length <= max) return value;
+
+        value = value.substr(0, max);
+        if (wordwise) {
+            var lastspace = value.lastIndexOf(' ');
+            if (lastspace != -1) {
+                value = value.substr(0, lastspace);
+            }
+        }
+
+        return value + (tail || ' …');
+    };
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -38,46 +58,36 @@ angular.module('wpc', ['ionic', 'wpc.controllers', 'wpc.services', 'ngResource']
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.live', {
+    url: '/live',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-live': {
+        templateUrl: 'templates/tab-live.html',
+        controller: 'LiveController'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.upcoming', {
+      url: '/upcoming',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-upcoming': {
+          templateUrl: 'templates/tab-upcoming.html',
+          controller: 'UpcomingController'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    .state('tab.recorded', {
+      url: '/recorded',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-recorded': {
+          templateUrl: 'templates/tab-recorded.html',
+          controller: 'RecordedController'
         }
       }
-    })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });
+    });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/live');
 
 });

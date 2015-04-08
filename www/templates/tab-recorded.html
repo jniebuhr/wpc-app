@@ -1,0 +1,11 @@
+<ion-view view-title="Recorded">
+    <ion-content>
+        <div class="bar bar-header bar-positive item-input-inset">
+            <ion-search class="search-wrapper-light" placeholder="Enter a term" min-length="1"></ion-search>
+        </div>
+        <div class="notice" ng:if="streams.length == 0">
+            Currently there are no streams available.
+        </div>
+        <div class="stream-card" stream-card ng:repeat="stream in streams"></div>
+    </ion-content>
+</ion-view>

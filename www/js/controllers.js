@@ -1,20 +1,37 @@
 angular.module('wpc.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('LiveController', ['$scope', 'StreamService', function($scope, StreamService) {
+        StreamService.get(function(data) {
+            $scope.streams = data.live;
+        });
+    }])
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
-})
+.controller('UpcomingController', ['$scope', 'StreamService', function($scope, StreamService) {
+        StreamService.get(function(data) {
+            $scope.streams = data.upcoming;
+        });
+    }])
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+.controller('RecordedController', ['$scope', 'StreamService', function($scope, StreamService) {
+        var streams = [];
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+        var escapeRegExp = function(str) {
+            return str.replace(/[\-\[\]\/\{\}\(\)\+\?\.\\\^\$\|]/g, "\\$&").replace(/\*/, ".*");
+        };
+        StreamService.get(function(data) {
+            streams = data.completed;
+            $scope.streams = streams;
+        });
+        $scope.filterStreams = function(term) {
+            var expression = '.*' + escapeRegExp(term) + '.*';
+            var regex = new RegExp(expression, "i");
+            var filteredStreams = [];
+            for (var i = 0; i < streams.length; i++) {
+                var stream = streams[i];
+                if (regex.test(stream.title)) {
+                    filteredStreams.push(stream);
+                }
+            }
+            $scope.streams = filteredStreams;
+        };
+    }]);

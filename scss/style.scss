@@ -1,0 +1,35 @@
+.stream-card {
+  padding: 5px 5px;
+  border-bottom: 1px solid gray;
+  height: 110px;
+
+  .thumbnail {
+    text-align: center;
+    img {
+      margin-top: 5px;
+      vertical-align: middle;
+      max-width: 100%;
+    }
+  }
+
+  .details {
+    .title, .user, .viewers {
+      display: block;
+    }
+    .title {
+      font-size: 110%;
+      font-weight: 600;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 40px;
+    border-bottom: none;
+  }
+}
+
+.notice {
+  padding: 15px;
+  text-align: center;
+  font-size: 120%;
+}

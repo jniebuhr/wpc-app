@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="thumbnail col col-33">
+        <img src="http://placekitten.com/120/67">
+    </div>
+    <div class="details col col-67">
+        <span class="title">{{ stream.title | truncate:true:50:'...' }}</span>
+        <span class="user">{{ stream.username }}</span>
+        <span ng:if="stream.viewers != null" class="viewers">{{ stream.viewers }} viewers</span>
+    </div>
+</div>
