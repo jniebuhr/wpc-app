@@ -5,10 +5,12 @@
 
   .thumbnail {
     text-align: center;
+    height: 90px;
     img {
       margin-top: 5px;
       vertical-align: middle;
       max-width: 100%;
+      max-height: 100%;
     }
   }
 

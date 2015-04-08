@@ -1,10 +1,37 @@
 angular.module('wpc.directives', [])
 
-.directive('streamCard', [function() {
+.directive('streamCard', ['$q', function($q) {
         return {
             templateUrl: 'templates/stream-card.html',
             'link': function($scope, $elem, $attrs) {
+
+                function isImage(src) {
+
+                    var deferred = $q.defer();
+
+                    var image = new Image();
+                    image.onerror = function() {
+                        deferred.resolve(false);
+                    };
+                    image.onload = function() {
+                        deferred.resolve(true);
+                    };
+                    image.src = src;
+
+                    return deferred.promise;
+                }
                 var stream = $scope.stream;
+                var link = stream.url;
+                var videoid = link.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+                if(videoid != null) {
+                    videoid = videoid[1];
+                    var thumbnail = "http://img.youtube.com/vi/" + videoid + "/0.jpg";
+                    isImage(thumbnail).then(function(result) {
+                        if (result) {
+                            stream.thumbnail = thumbnail;
+                        }
+                    });
+                }
                 $elem.on('click', function() {
                     window.open(stream.url, '_blank', 'location=yes');
                 });
