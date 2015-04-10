@@ -4,6 +4,16 @@ angular.module('wpc.controllers', [])
         StreamService.get(function(data) {
             $scope.streams = data.live;
         });
+
+        $scope.doRefresh = function() {
+            StreamService.get(function(data) {
+                $scope.streams = data.live;
+            });
+
+            $scope.$broadcast('scroll.refreshComplete');
+
+            $scope.$apply();
+        }
     }])
 
 .controller('UpcomingController', ['$scope', 'StreamService', function($scope, StreamService) {
