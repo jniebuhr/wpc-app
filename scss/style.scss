@@ -2,10 +2,13 @@
   padding: 5px 5px;
   border-bottom: 1px solid gray;
   height: 110px;
+  cursor: pointer;
 
   .thumbnail {
     text-align: center;
     height: 90px;
+    flex: 1 1 65px;
+    margin-right: 10px;
     img {
       margin-top: 5px;
       vertical-align: middle;
@@ -15,12 +18,18 @@
   }
 
   .details {
+    flex: 10 1 0;
     .title, .user, .viewers {
       display: block;
     }
     .title {
       font-size: 110%;
       font-weight: 600;
+      max-height: 40px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
   }
 

@@ -22,15 +22,21 @@ angular.module('wpc.directives', [])
                 }
                 var stream = $scope.stream;
                 var link = stream.url;
-                var videoid = link.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
-                if(videoid != null) {
-                    videoid = videoid[1];
-                    var thumbnail = "http://img.youtube.com/vi/" + videoid + "/0.jpg";
-                    isImage(thumbnail).then(function(result) {
-                        if (result) {
-                            stream.thumbnail = thumbnail;
-                        }
-                    });
+                if (stream.site == 'youtube_stream') {
+                    var videoid = link.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+                    if(videoid != null) {
+                        videoid = videoid[1];
+                        var thumbnail = "http://img.youtube.com/vi/" + videoid + "/0.jpg";
+                        isImage(thumbnail).then(function(result) {
+                            if (result) {
+                                stream.thumbnail = thumbnail;
+                            }
+                        });
+                    }
+                } else if(stream.site == 'twitch_stream') {
+                    stream.thumbnail = '/img/twitch_logo.png';
+                } else if(stream.site == 'wpc_stream') {
+                    stream.thumbnail = '/img/wpc_logo.png';
                 }
                 $elem.on('click', function() {
                     window.open(stream.url, '_blank', 'location=yes');

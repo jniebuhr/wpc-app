@@ -1,20 +1,30 @@
 .stream-card {
   padding: 5px 5px;
   border-bottom: 1px solid gray;
-  height: 110px; }
+  height: 110px;
+  cursor: pointer; }
   .stream-card .thumbnail {
     text-align: center;
-    height: 90px; }
+    height: 90px;
+    flex: 1 1 65px;
+    margin-right: 10px; }
     .stream-card .thumbnail img {
       margin-top: 5px;
       vertical-align: middle;
       max-width: 100%;
       max-height: 100%; }
-  .stream-card .details .title, .stream-card .details .user, .stream-card .details .viewers {
-    display: block; }
-  .stream-card .details .title {
-    font-size: 110%;
-    font-weight: 600; }
+  .stream-card .details {
+    flex: 10 1 0; }
+    .stream-card .details .title, .stream-card .details .user, .stream-card .details .viewers {
+      display: block; }
+    .stream-card .details .title {
+      font-size: 110%;
+      font-weight: 600;
+      max-height: 40px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; }
   .stream-card:last-child {
     margin-bottom: 40px;
     border-bottom: none; }
