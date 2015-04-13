@@ -7,3 +7,4 @@ plugins/
 
 /.idea/
 /*.iml
+.DS_Store

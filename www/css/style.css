@@ -7,7 +7,10 @@
     text-align: center;
     height: 90px;
     flex: 1 1 65px;
-    margin-right: 10px; }
+    margin-right: 10px;
+    min-width: 75px;
+    width: 75px;
+    max-width: 75px; }
     .stream-card .thumbnail img {
       margin-top: 5px;
       vertical-align: middle;
