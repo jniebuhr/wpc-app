@@ -34,9 +34,9 @@ angular.module('wpc.directives', [])
                         });
                     }
                 } else if(stream.site == 'twitch_stream') {
-                    stream.thumbnail = '/img/twitch_logo.png';
+                    stream.thumbnail = 'img/twitch_logo.png';
                 } else if(stream.site == 'wpc_stream') {
-                    stream.thumbnail = '/img/wpc_logo.png';
+                    stream.thumbnail = 'img/wpc_logo.png';
                 }
                 $elem.on('click', function() {
                     window.open(stream.url, '_blank', 'location=yes');
