@@ -40,6 +40,7 @@ angular.module('wpc.controllers', [])
         */
 
         var updateSchedules = function(streams) {
+	    return;
             if ("undefined" !== typeof cordova && "undefined" !== typeof cordova.plugins.notification.local) {
                 for (var i = 0; i < streams.length; i++) {
                     var stream = streams[i];
